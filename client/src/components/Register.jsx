@@ -11,8 +11,9 @@ const Register = () => {
     event.preventDefault();
     try {
       await axios.post(`${BASE_API_URL}/register`, { username, password });
-      alert("Registered Successfully! 😀")
+      alert("Registered Successfully! 😀");
     } catch (error) {
+      alert("User Already Exists!!! 😮‍💨");
       console.error(error);
     }
   };

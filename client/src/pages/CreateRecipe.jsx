@@ -4,9 +4,10 @@ import axios from "axios";
 import { BASE_RECIPE_API_URL } from "../utils/constants.js";
 import { useGetUserID } from "../hooks/useGetUserID.js";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 const CreateRecipe = () => {
   const userID = useGetUserID();
-
+  const [cookies, _] = useCookies(["access_token"]);
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: [],
@@ -46,7 +47,9 @@ const CreateRecipe = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${BASE_RECIPE_API_URL}`, recipe);
+      const response = await axios.post(`${BASE_RECIPE_API_URL}`, recipe, {
+        headers: { authorization: cookies.access_token },
+      });
       alert("Recipe Created! 🍔");
       navigate("/");
     } catch (error) {

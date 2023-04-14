@@ -34,7 +34,7 @@ const SavedRecipes = () => {
 
   return (
     <div>
-      <h1>Recipes</h1>
+      <h1>Saved Recipes</h1>
       <ul>
         {recipes.map(
           (recipe) =>

@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 
-const { router } = require("./routes/users.js");
+const { authRouter } = require("./routes/users.js");
 const recipesRouter = require("./routes/recipes.js");
 
 require("dotenv").config();
@@ -12,7 +12,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-app.use("/auth", router);
+app.use("/auth", authRouter);
 
 app.use("/recipes", recipesRouter);
 

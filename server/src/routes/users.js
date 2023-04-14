@@ -43,7 +43,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Middleware to Authorize the User!
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
@@ -56,5 +55,5 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports.router = router;
+module.exports.authRouter = router;
 module.exports.verifyToken = verifyToken;

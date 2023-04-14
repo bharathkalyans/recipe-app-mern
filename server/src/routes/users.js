@@ -43,8 +43,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  res.send("Auth Sucessfull");
-});
+//Middleware to Authorize the User!
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(token, "secret", (err) => {
+      if (err) res.sendStatus(403);
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
 
-module.exports = router;
+module.exports.router = router;
+module.exports.verifyToken = verifyToken;
